@@ -1,0 +1,4 @@
+# Project exclude paths
+/node_modules/
+/configs/config.json
+/configs/*.env
