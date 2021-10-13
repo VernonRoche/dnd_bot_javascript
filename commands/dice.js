@@ -1,4 +1,5 @@
 const { SlashCommandBuilder } = require('@discordjs/builders');
+const fs = require('fs');
 
 module.exports = {
     data: new SlashCommandBuilder()
@@ -28,10 +29,14 @@ module.exports = {
                         .setRequired(true)),
         ),
     async execute(interaction) {
-        const commands = {
-            skill: require('./subcommands/dice_skill'),
-            normal: require('./subcommands/dice_normal'),
-        };
+        // Dynamically get all subcommands for called command
+        const path = './commands/subcommands/';
+        const files = fs.readdirSync(path, (err, tmp_files) => tmp_files.filter(file => file.contains('dice_')));
+        const commands = {};
+        for (const file of files){
+            const name = file.split('dice_')[1].slice(0,-3);
+            commands[name]= require('./subcommands/'+file);
+        }
         const toExecute = commands[interaction.options.getSubcommand()];
         toExecute.execute(interaction);
     },

@@ -4,8 +4,7 @@ module.exports = {
     // TO BE EXPANDED
     async execute(interaction) {
         const name=interaction.options.getString('name');
-        await interaction.deferReply({ ephemeral: true });
         const dice_roll=dice_roller.dice_roll(20);
-        await interaction.editReply(name+' rolled: '+dice_roll);
+        await interaction.reply(name+' rolled: '+dice_roll);
     },
 };
