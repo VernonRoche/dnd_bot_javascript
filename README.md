@@ -1,2 +1,1 @@
-## Dice roller bot
-testsetee
+## Dice roller bote
